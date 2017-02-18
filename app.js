@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var session = require('express-session')
 
-/*databases connection*/
-var mongo = require('./dbconfig/mongo_config');
-mongo.connect();
 
 var app = express();
 app.version = "[ v_0.9.5 ]";
@@ -34,30 +31,8 @@ app.use(express.static(__dirname + '/public'));
 
 // Router declaration
 var index = require('./routes/index_router');
-var agent = require('./routes/agent_router');
-var profile = require('./routes/profile_router');
-var api = require('./routes/api_router');  
-var user = require('./routes/user_router');  
-var group = require('./routes/group_router');  
-var connection = require('./routes/connection_router');
-var setting = require('./routes/setting_router');
-var course = require('./routes/course_router');
-var bookmark = require('./routes/bookmark_router');
-var auth = require('./routes/auth_router');
 app.use('/', index);
-app.use('/agent', agent);
-app.use('/group', group);
-app.use('/API', api);
-app.use('/profile', profile);
-app.use('/connections', connection);
-app.use('/user', user);
-app.use('/setting', setting);
-app.use('/course', course);
-app.use('/bookmark', bookmark);
 // app.use('/auth', auth);
-
-// GLOBAL VARIABLE
-global.response = require('./controller/base/response_cont');
 
 
 // catch 404 and forward to error handler

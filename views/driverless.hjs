@@ -1,36 +1,18 @@
 <!DOCTYPE html>
-
 <style type="text/css">
-	.dot{
-    position:absolute;
-    top:0;
-    left:0;
-    width:50px;
-    height:50px;
-    background:red;
-    border-radius:50%;
-}
-.sun{
-    width:200px;
-    height:200px;
-    position:absolute;
-    -webkit-animation-iteration-count:infinite;
-    -webkit-animation-timing-function:linear;
-    -webkit-animation-name:orbit;
-    -webkit-animation-duration:5s;
-    top:100px;
-    left:50px;
-}
-
-@-webkit-keyframes orbit { 
-from { -webkit-transform:rotate(0deg) } 
-to { -webkit-transform:rotate(360deg) } }
-
+.rotate {
+	/* Safari */
+	-webkit-transform: rotate(-90deg);
+	/* Firefox */
+	-moz-transform: rotate(-90deg);
+	/* IE */
+	-ms-transform: rotate(-90deg);
+	/* Opera */
+	-o-transform: rotate(-90deg);
+	/* Internet Explorer */
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+	}
 </style>
-<script type="text/javascript">
-	var street = '<%street%>';
-	var speed = '<%speed%>';
-</script>
 <html lang="en" style="overflow: hidden;">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
@@ -48,392 +30,487 @@ to { -webkit-transform:rotate(360deg) } }
       <link rel="shortcut icon" type="image/png" href="/images/logo.jpg"/>
     </head>
     <body>
-    	<br>
-    	<div style="text-align: center;">
-			<!-- <h4><% title %></h4> -->
-			<br>
-		</div>
-		<br>
-        <div class="row col-sm-3" style="padding:0px 0px"></div>
-
-        <div class="row col-sm-6" style="padding:0px 0px">
-        	<div class="row col-sm-12" id="track" style="height: 400px;">
-				<canvas id="c" width="960" height="502" style="    margin-left: -13px;" />
-			</div>
-        	<br>
-	         <div   method="" class="col-sm-12">
-			      <br>
-			      <div class="col-sm-2" ></div>
-		          <div class="col-sm-9" >
-		              <div class="row" style=" margin-top: 0px;">
-						<div class="row" style="margin-bottom: 4px;" >
-				          <div class="col-sm-3" >
-				            <h5>Jenis Jalan</h5>
-				          </div>
-				          <div class="col-sm-3" style="padding-right: 0px; padding-left: 0px;">
-		                    <select class="form-control" id="streetMenu">
-		                    	<script type="text/javascript">
-		                    		if(street == 'a'){
-		                      			document.write("<option id=\"a\" selected=\"selected\">Berpasir</option>");
-		                      			document.write("<option id=\"b\" >Beraspal</option>");
-		                    		}else if(street == 'b'){
-		                      			document.write("<option id=\"a\" >Berpasir</option>");
-		                      			document.write("<option id=\"b\"  selected=\"selected\">Beraspal</option>");
-		                    		}
-		                    	</script>
-		                    </select>
-				          </div>
-				          <div class="col-sm-1"></div>
-				          <div class="col-sm-2" >
-				            <h5>Torsi</h5>
-				          </div>
-				          <div class="col-sm-2" style="padding-right: 0px; padding-left: 0px;">
-				            <h5>23</h5>
-				          </div>
-				        </div>
-				        
-				        <div class="row" style="margin-bottom: 4px;" >
-				          <div class="col-sm-3" >
-				            <h5>Kecepatan</h5>
-				          </div>
-				          <div class="col-sm-3" style="padding-right: 0px; padding-left: 0px;">
-		                    <select class="form-control" id="speedMenu">
-		                    	<script type="text/javascript">
-		                    		if(speed == 1){
-		                      			document.write("<option id=\"1\"  selected=\"selected\">0 kmph</option>");
-		                      			document.write("<option id=\"2\" >10 kmph</option>");
-		                      			document.write("<option id=\"3\" >20 kmph</option>");
-		                      			document.write("<option id=\"4\" >30 kmph</option>");
-		                      			document.write("<option id=\"5\" >40 kmph</option>");
-		                    		}else if(speed == 2){
-		                      			document.write("<option id=\"1\" >1. 0 kmph</option>");
-		                      			document.write("<option id=\"2\"  selected=\"selected\">10 kmph</option>");
-		                      			document.write("<option id=\"3\" >20 kmph</option>");
-		                      			document.write("<option id=\"4\" >30 kmph</option>");
-		                      			document.write("<option id=\"5\" >40 kmph</option>");
-		                    		}else if(speed == '3'){
-		                      			document.write("<option id=\"1\" >0 kmph</option>");
-		                      			document.write("<option id=\"2\" >10 kmph</option>");
-		                      			document.write("<option id=\"3\"  selected=\"selected\">20 kmph</option>");
-		                      			document.write("<option id=\"4\" >30 kmph</option>");
-		                      			document.write("<option id=\"5\" >40 kmph</option>");
-		                    		}else if(speed == '4'){
-		                      			document.write("<option id=\"1\" >0 kmph</option>");
-		                      			document.write("<option id=\"2\" >10 kmph</option>");
-		                      			document.write("<option id=\"3\" >20 kmph</option>");
-		                      			document.write("<option id=\"4\"  selected=\"selected\">30 kmph</option>");
-		                      			document.write("<option id=\"5\" >40 kmph</option>");
-		                    		}else if(speed == '5'){
-		                      			document.write("<option id=\"1\" >0 kmph</option>");
-		                      			document.write("<option id=\"2\" >10 kmph</option>");
-		                      			document.write("<option id=\"3\" >20 kmph</option>");
-		                      			document.write("<option id=\"4\" >30 kmph</option>");
-		                      			document.write("<option id=\"5\"  selected=\"selected\">40 kmph</option>");
-		                    		}
-
-		                    	</script>
-		                    </select>
-				          </div>
-				          <div class="col-sm-1"></div>
-				          <div class="col-sm-2" >
-				            <h5>Arus</h5>
-				          </div>
-				          <div class="col-sm-2" style="padding-right: 0px; padding-left: 0px;">
-				            <h5>23</h5>
-				          </div>
-				        </div>
-				       </div>
-				       <br>
-				       <div class="col-sm-12" style="text-align: center">
-							<button class="btn btn-primary" onclick="apply()">Apply</button>	
-							<button class="btn btn-success" onclick="play()">Start</button>
-						<button class="btn btn-warning" onclick="location.reload()">Stop</button>
-				       </div>
-				  </div>
-			</div>
-
-		</div>
-        <div class="row col-sm-3" style="padding:0px 0px"></div>
+    	<div class="row">
+    		<div class="col-md-3"></div>
+    		<div class="col-md-6" style="height: 300px">
+	    		<div class="col-md-1"></div>
+	    		<div class="col-md-10" id="graph" style="height: 250px; ">
+	    			
+	    		</div>
+	    		<div class="col-md-1"></div>
+    		</div>
+    		<span style="position: absolute; left: 325px; top: 69px;">70 kmph</span>
+    		<span style="position: absolute; left: 325px; top: 108px;">60 kmph</span>
+    		<span style="position: absolute; left: 325px; top: 188px;">40 kmph</span>
+    		<span style="position: absolute; left: 325px; top: 269px;">20 kmph</span>
+    		<span style="position: absolute; left: 325px; top: 148px;">50 kmph</span>
+    		<span style="position: absolute; left: 325px; top: 228px;">30 kmph</span>
+    		<span style="position: absolute; left: 325px; top: 309px;">10 kmph</span>
+    		<span style="position: absolute; left: 325px; top: 349px;"> 0 kmph</span>
+    		<span style="position: absolute; left: 866px; top: 364px; color: red">Now</span>
+    		<!-- <span style="position: absolute; left: 630px; top: 430px;">Time</span> -->
+    		<span class="rotate" style="position: absolute; left: 260px; top: 187px;">Speed</span>
+    		<div class="col-md-3"></div>
+    		<span class="rotate" style="position: absolute; left: 293px; top: 520px;">Torque</span>
+    		<span style="position: absolute; left: 350px; top: 639px;">-4 Nm</span>
+    		<span style="position: absolute; left: 350px; top: 614px;">-3 Nm</span>
+    		<span style="position: absolute; left: 350px; top: 589px;">-2 Nm</span>
+    		<span style="position: absolute; left: 350px; top: 564px;">-1 Nm</span>
+    		<span style="position: absolute; left: 350px; top: 539px;">0 Nm</span>
+    		<span style="position: absolute; left: 350px; top: 514px;">1 Nm</span>
+    		<span style="position: absolute; left: 350px; top: 489px;">2 Nm</span>
+    		<span style="position: absolute; left: 350px; top: 464px;">3 Nm</span>
+    		<span style="position: absolute; left: 350px; top: 439px;">4 Nm</span>
+    		<span style="position: absolute; left: 875px; top: 655px; color: red">Now</span>
+    	</div>
  	</body>
-
 </html>
 
 <script type="text/javascript">
-function sendSpeedToArduino(){
-	var i = 1; 
-	while(true){
-		if(time.now(minute)%2 == 0){
-			changeSpeed(i*10);
-			i++;
-		}
-		if(i == 4)
-			i = 1;
-		//generate grafik kecpatam
-	}
-}
-
-function changeSpeed(speed){
-	var http = new XMLHttpRequest();
-  	http.open("POST", "/driverless/setSpeed", true);
- // alert()
-    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-    var params = "speed=" + window.encodeURIComponent(speed);
-    http.send((params));
-    http.onload = function() {
-      if(http.responseText=="404"){
-        //error
-        // alert(http.responseText);
-      }else{
-        // alert(http.responseText);
-      }
-    }
-    return false;
-}
-//======================================================================================
-
-
-var c2 = document.getElementById('c').getContext('2d');
-c2.beginPath();
-c2.arc(802, 322, 50, 1.5*Math.PI, 0.5*Math.PI);
-c2.lineTo(160, 372);
-c2.arc(160, 322, 50, 0.5*Math.PI, 1*Math.PI);
-c2.lineTo(110, 122);
-c2.arc(160, 122, 50, 1*Math.PI, 1.5*Math.PI);
-c2.lineTo(802, 72);
-c2.arc(802, 122, 50, 1.5*Math.PI, 0.5*Math.PI);
-c2.arc(248, 222, 50, 1.5*Math.PI, 0.5*Math.PI, true);
-c2.lineTo(802, 272);
-c2.lineWidth = 5;
-c2.strokeStyle = '#550000';
-c2.stroke();
-
-
-
-	var el = document.getElementById("track"),
+	var el = document.getElementById("graph"),
     two = new Two({ 
         fullscreen: true
     });
  
-	two.appendTo(el);
-
-	var earthAngle = -90,
-	    moonAngle  = 0,
-	    distance   = 30,
-	    radius     = 15,
-	    padding    = 100,
-	    orbit      = 50,
-	    offset     = orbit + padding,
-	    orbits     = two.makeGroup();
+  	two.appendTo(el);
 
 
-	function getPositions(angle, orbit) {
-	    return {
-	        x: Math.cos(angle * Math.PI / 180) * orbit,
-	        y: Math.sin(angle * Math.PI / 180) * orbit
-	    };
-	}
-	var pos = getPositions(earthAngle++, orbit),
-	earth = two.makeCircle(pos.x + offset + 1130, pos.y + offset + 230, radius);
-	turnClock = true;
-	earth.stroke = "#123456";
-	earth.linewidth = 4;
-	earth.fill = "#194878";
-	var periode = 0;
-	var lap = 0;
-	var maxLap = 2;
+	var height = 40;
+	var speedStarted = false;
 
-	// two.makeRectangle(pos.x + offset + 1130, pos.y + offset + 230, 40, 20);
+
+	line = two.makeLine(880 + (480*0), 200 + (height*4), 880 + (480*1), 200 + (height*4));
+	line.linewidth = 2;
+	line.stroke = "blue";
+	//line.fill = "#194878";
+
+		transition1 = two.makeLine(880+480,(height*3) + 200 , 880+480,(height*4) +200 );
+		transition1.linewidth = 2;
+		transition1.stroke = "blue";
+
+	line2 = two.makeLine(880+480, (height*3) + 200, 1360+480, (height*3) + 200);
+	line2.linewidth = 2;
+	line2.stroke = "blue";
+	//line2.fill = "#194878";
+
+		transition2 = two.makeLine(880+(480*2),(height*2) + 200 , 880+(480*2),(height*3) + 200 );
+		transition2.linewidth = 2;
+		transition2.stroke = "blue";
+
+	line3 = two.makeLine(880 + (480*2), (height*2) + 200, 1360 + (480*2), (height*2) + 200);
+	line3.linewidth = 2;
+	line3.stroke = "blue";
+
+		transition3 = two.makeLine(880+(480*3),(height*1) + 200 , 880+(480*3),(height*2) + 200 );
+		transition3.linewidth = 2;
+		transition3.stroke = "blue";
+
+	line4 = two.makeLine(880 + (480*3), (height + 200), 1360 + (480*3), (height) + 200);
+	line4.linewidth = 2;
+	line4.stroke = "blue";
+
+		transition4 = two.makeLine(880+(480*4),(height*0) + 200 , 880+(480*4),(height*1) + 200 );
+		transition4.linewidth = 2;
+		transition4.stroke = "blue";
+
+	line5 = two.makeLine(880+(480*4), (height*0) + 200, 1360+(480*4), (height*0) + 200);
+	line5.linewidth = 2;
+	line5.stroke = "blue";
+	//line2.fill = "#194878";
+
+		transition5 = two.makeLine(880+(480*5),(height*-1) + 200 , 880+(480*5),(height*0) + 200 );
+		transition5.linewidth = 2;
+		transition5.stroke = "blue";
+
+	line6 = two.makeLine(880 + (480*5), (height*(-1)) + 200, 1360 + (480*5), (height*(-1)) + 200);
+	line6.linewidth = 2;
+	line6.stroke = "blue";
+
+		transition6 = two.makeLine(880+(480*6),(height*-2) + 200 , 880+(480*6),(height*-1) + 200 );
+		transition6.linewidth = 2;
+		transition6.stroke = "blue";
+
+	line7 = two.makeLine(880 + (480*6), (height*(-2) + 200), 1360 + (480*6), (height*(-2)) + 200);
+	line7.linewidth = 2;
+	line7.stroke = "blue";
+
+		transition7 = two.makeLine(880+(480*7),(height*-3) + 200 , 880+(480*7),(height*-2) + 200 );
+		transition7.linewidth = 2;
+		transition7.stroke = "blue";
+
+	line8 = two.makeLine(880 + (480*7), (height*(-3) + 200), 1360 + (480*7), (height*(-3)) + 200);
+	line8.linewidth = 2;
+	line8.stroke = "blue";
+
+		transition8 = two.makeLine(880+(480*8),(height*-3) + 200 , 880+(480*8),(height*4) + 200 );
+		transition8.linewidth = 2;
+		transition8.stroke = "blue";
+
 	two.update();
-	updateLap = false;
-	// speed --;
-two.bind("update", function (frameCount) {
-	if(lap <= maxLap){
-		periode = (frameCount% (3304/speed));
 
-		if(periode < 100 && !updateLap){
-			// alert('cdccd')
-			lap++;
-			updateLap = true;
+    rect = two.makeRectangle(200, 200, 400, 400)
+	rect.fill = "white";
+	rect.stroke = "white";
+	
+    rect2 = two.makeRectangle(1207, 200, 652, 324)
+	rect2.fill = "white";
+	rect2.stroke = "white";
+
+	currTime = two.makeLine(880,55 , 880,360 );
+	currTime.stroke = "red";
+	currTime.linewidth = 1;
+	currTime.fill = "#194878";
+
+	currTimeTorque = two.makeLine(892,430 , 892,660 );
+	currTimeTorque.stroke = "red";
+	currTimeTorque.linewidth = 1;
+	currTimeTorque.fill = "#194878";
+
+	xAxis = two.makeLine(398, 363, 900, 363);
+	xAxis.stroke = "#123456";
+	xAxis.linewidth = 4;
+	xAxis.fill = "#194878";
+
+	yAxis = two.makeLine(400,55 , 400,362 );
+	yAxis.stroke = "#123456";
+	yAxis.linewidth = 4;
+	yAxis.fill = "#194878";
+
+	
+
+// grafik torsi
+
+	yAxisTorsi = two.makeLine(400,430 , 400,670 );
+	yAxisTorsi.stroke = "#123456";
+	yAxisTorsi.linewidth = 4;
+	yAxisTorsi.fill = "#194878";
+
+	xAxisTorsi = two.makeLine(398, 550, 900, 550);
+	xAxisTorsi.stroke = "#123456";
+	xAxisTorsi.linewidth = 4;
+	xAxisTorsi.fill = "#194878";
+
+
+	// 40 panjangnya
+	// 25 tingginya
+	strip1 = two.makeLine(395 , 625, 407 + 485 , 625);
+	strip1.stroke = "#123456";
+	strip1.linewidth = 2;
+	strip1.fill = "#194878";
+
+	strip2 = two.makeLine(395 , 625 - (25*1), 407 + 485 , 625 - (25*1));
+	strip2.stroke = "#123456";
+	strip2.linewidth = 2;
+	strip2.fill = "#194878";
+
+	strip3 = two.makeLine(395 , 625 - (25*2), 407 + 485 , 625 - (25*2));
+	strip3.stroke = "#123456";
+	strip3.linewidth = 2;
+	strip3.fill = "#194878";
+
+	strip4 = two.makeLine(395 , 625 - (25*3), 407 + 485 , 625 - (25*3));
+	strip4.stroke = "#123456";
+	strip4.linewidth = 2;
+	strip4.fill = "#194878";
+
+	strip5 = two.makeLine(395 , 625 - (25*4), 407 + 485 , 625 - (25*4));
+	strip5.stroke = "#123456";
+	strip5.linewidth = 2;
+	strip5.fill = "#194878";
+
+	strip6 = two.makeLine(395 , 625 - (25*5), 407 + 485 , 625 - (25*5));
+	strip6.stroke = "#123456";
+	strip6.linewidth = 2;
+	strip6.fill = "#194878";
+
+	strip7 = two.makeLine(395 , 625 - (25*6), 407 + 485 , 625 - (25*6));
+	strip7.stroke = "#123456";
+	strip7.linewidth = 2;
+	strip7.fill = "#194878";
+
+	strip8 = two.makeLine(395 , 625 - (25*7), 407 + 485 , 625 - (25*7));
+	strip8.stroke = "#123456";
+	strip8.linewidth = 2;
+	strip8.fill = "#194878";
+
+
+	strip9 = two.makeLine(395 , 625 + (25), 407 + 485 , 625 + (25));
+	strip9.stroke = "#123456";
+	strip9.linewidth = 2;
+	strip9.fill = "#194878";
+// end of grafik torsi
+
+
+	plot1  = two.makePath(0,0,true);		
+	two.update();
+
+	speed = 4;
+	// alert(speed)
+var time1;
+var time2;
+//Looping update graph
+two.bind("update", function (frameCount) {
+	// update Torque's graph
+	if (frameCount % 10 == 0){
+		getTorqueData(function (Torque){
+			if(Torque.length == 83){
+				two.remove(plot1);
+				plot1  = two.makePath(
+					400+(6*0), 550-(25*Torque[0]), 
+					400+(6*1), 550-(25*Torque[1]), 
+					400+(6*2), 550-(25*Torque[2]), 
+					400+(6*3), 550-(25*Torque[3]),
+					400+(6*4), 550-(25*Torque[4]), 
+					400+(6*5), 550-(25*Torque[5]), 
+					400+(6*6), 550-(25*Torque[6]),  
+					400+(6*7), 550-(25*Torque[7]), 
+					400+(6*8), 550-(25*Torque[8]), 
+					400+(6*9), 550-(25*Torque[9]),  
+					400+(6*10), 550-(25*Torque[10]), 
+					400+(6*11), 550-(25*Torque[11]), 
+					400+(6*12), 550-(25*Torque[12]),  
+					400+(6*13), 550-(25*Torque[13]),
+					400+(6*14), 550-(25*Torque[14]), 
+					400+(6*15), 550-(25*Torque[15]), 
+					400+(6*16), 550-(25*Torque[16]),  
+					400+(6*17), 550-(25*Torque[17]), 
+					400+(6*18), 550-(25*Torque[18]), 
+					400+(6*19), 550-(25*Torque[19]),  
+					400+(6*20), 550-(25*Torque[20]), 
+					400+(6*21), 550-(25*Torque[21]), 
+					400+(6*22), 550-(25*Torque[22]), 
+					400+(6*23), 550-(25*Torque[23]),
+					400+(6*24), 550-(25*Torque[24]), 
+					400+(6*25), 550-(25*Torque[25]), 
+					400+(6*26), 550-(25*Torque[26]),  
+					400+(6*27), 550-(25*Torque[27]), 
+					400+(6*28), 550-(25*Torque[28]), 
+					400+(6*29), 550-(25*Torque[29]),  
+					400+(6*30), 550-(25*Torque[30]), 
+					400+(6*31), 550-(25*Torque[31]), 
+					400+(6*32), 550-(25*Torque[32]),  
+					400+(6*33), 550-(25*Torque[33]),
+					400+(6*34), 550-(25*Torque[34]), 
+					400+(6*35), 550-(25*Torque[35]), 
+					400+(6*36), 550-(25*Torque[36]),  
+					400+(6*37), 550-(25*Torque[37]), 
+					400+(6*38), 550-(25*Torque[38]), 
+					400+(6*39), 550-(25*Torque[39]),  
+					400+(6*40), 550-(25*Torque[40]), 
+					400+(6*41), 550-(25*Torque[41]), 
+					400+(6*42), 550-(25*Torque[42]),
+					400+(6*43), 550-(25*Torque[43]),
+					400+(6*44), 550-(25*Torque[44]), 
+					400+(6*45), 550-(25*Torque[45]), 
+					400+(6*46), 550-(25*Torque[46]),  
+					400+(6*47), 550-(25*Torque[47]), 
+					400+(6*48), 550-(25*Torque[48]), 
+					400+(6*49), 550-(25*Torque[49]),  
+					400+(6*50), 550-(25*Torque[50]), 
+					400+(6*51), 550-(25*Torque[51]), 
+					400+(6*52), 550-(25*Torque[52]),  
+					400+(6*53), 550-(25*Torque[53]),
+					400+(6*54), 550-(25*Torque[54]), 
+					400+(6*55), 550-(25*Torque[55]), 
+					400+(6*56), 550-(25*Torque[56]),  
+					400+(6*57), 550-(25*Torque[57]), 
+					400+(6*58), 550-(25*Torque[58]), 
+					400+(6*59), 550-(25*Torque[59]),  
+					400+(6*60), 550-(25*Torque[60]), 
+					400+(6*61), 550-(25*Torque[61]), 
+					400+(6*62), 550-(25*Torque[62]), 
+					400+(6*63), 550-(25*Torque[63]),
+					400+(6*64), 550-(25*Torque[64]), 
+					400+(6*65), 550-(25*Torque[65]), 
+					400+(6*66), 550-(25*Torque[66]),  
+					400+(6*67), 550-(25*Torque[67]), 
+					400+(6*68), 550-(25*Torque[68]), 
+					400+(6*69), 550-(25*Torque[69]),  
+					400+(6*70), 550-(25*Torque[70]), 
+					400+(6*71), 550-(25*Torque[71]), 
+					400+(6*72), 550-(25*Torque[72]),  
+					400+(6*73), 550-(25*Torque[73]),
+					400+(6*74), 550-(25*Torque[74]), 
+					400+(6*75), 550-(25*Torque[75]), 
+					400+(6*76), 550-(25*Torque[76]),  
+					400+(6*77), 550-(25*Torque[77]), 
+					400+(6*78), 550-(25*Torque[78]), 
+					400+(6*79), 550-(25*Torque[79]),  
+					400+(6*80), 550-(25*Torque[80]), 
+					400+(6*81), 550-(25*Torque[81]), 
+					400+(6*82), 550-(25*Torque[82]),  
+					true);
+					// plot1.fill('blue');
+			}
+			two.remove(strip1);
+			two.remove(strip2);
+			two.remove(strip3);
+			two.remove(strip4);
+			two.remove(strip5);
+			two.remove(strip6);
+			two.remove(strip7);
+			two.remove(strip8);
+			two.remove(strip9);
+			strip1 = two.makeLine(395 , 625, 407 + 485 , 625);
+			strip1.stroke = "#123456";
+			strip1.linewidth = 2;
+			strip1.fill = "#194878";
+
+			strip2 = two.makeLine(395 , 625 - (25*1), 407 + 485 , 625 - (25*1));
+			strip2.stroke = "#123456";
+			strip2.linewidth = 2;
+			strip2.fill = "#194878";
+
+			strip3 = two.makeLine(395 , 625 - (25*2), 407 + 485 , 625 - (25*2));
+			strip3.stroke = "#123456";
+			strip3.linewidth = 2;
+			strip3.fill = "#194878";
+
+			strip4 = two.makeLine(395 , 625 - (25*3), 407 + 485 , 625 - (25*3));
+			strip4.stroke = "#123456";
+			strip4.linewidth = 2;
+			strip4.fill = "#194878";
+
+			strip5 = two.makeLine(395 , 625 - (25*4), 407 + 485 , 625 - (25*4));
+			strip5.stroke = "#123456";
+			strip5.linewidth = 2;
+			strip5.fill = "#194878";
+
+			strip6 = two.makeLine(395 , 625 - (25*5), 407 + 485 , 625 - (25*5));
+			strip6.stroke = "#123456";
+			strip6.linewidth = 2;
+			strip6.fill = "#194878";
+
+			strip7 = two.makeLine(395 , 625 - (25*6), 407 + 485 , 625 - (25*6));
+			strip7.stroke = "#123456";
+			strip7.linewidth = 2;
+			strip7.fill = "#194878";
+
+			strip8 = two.makeLine(395 , 625 - (25*7), 407 + 485 , 625 - (25*7));
+			strip8.stroke = "#123456";
+			strip8.linewidth = 2;
+			strip8.fill = "#194878";
+
+
+			strip9 = two.makeLine(395 , 625 + (25), 407 + 485 , 625 + (25));
+			strip9.stroke = "#123456";
+			strip9.linewidth = 2;
+			strip9.fill = "#194878";
+
+		});
+	}
+	//end of update Torque's graph
+
+	two.remove(xAxisTorsi);
+	xAxisTorsi = two.makeLine(398, 550, 900, 550);
+	xAxisTorsi.stroke = "#123456";
+	xAxisTorsi.linewidth = 4;
+	xAxisTorsi.fill = "#194878";
+	// update Speed's graph
+
+	if(!speedStarted){
+		// dipanggil 58 kali dalam 1 detik
+		getStart(function(data){
+			speedStarted = data;
+		})
+	}else if(frameCount%10 == 0){
+		for (var i = speed ; i > 0; i--) {
+	        line.translation.x--;
+	        line2.translation.x--;
+	        line3.translation.x--;
+	        line4.translation.x--;
+	        line5.translation.x--;
+	        line6.translation.x--;
+	        line7.translation.x--;
+	        line8.translation.x--;
+	        transition1.translation.x--;
+	        transition2.translation.x--;
+	        transition3.translation.x--;
+	        transition4.translation.x--;
+	        transition5.translation.x--;
+	        transition6.translation.x--;
+	        transition7.translation.x--;
+	        transition8.translation.x--;
 		}
 
-    	if(periode <= 180/speed){
-    		for (var i = 1; i < speed; i++) {
-    			earthAngle++;
-    		}
-    		var pos = getPositions(earthAngle++, orbit);
-	    	earth.translation.x = pos.x + offset + 1130	;
-	    	earth.translation.y = pos.y + offset + 230;
-	    	if (periode <= 180/speed/2){
-	    		console.log('r')
-	    		TurnRight()
-	    	}else{
-	    		console.log('l')
-	    		TurnLeft()
-	    	}
-    	}else if (periode <= 820/speed){
-    		for (var i = 1; i < speed; i++) {
-	    		earth.translation.x--;
-    		}
-	    	earth.translation.x--;
-    	}else if (periode <= 910/speed){
-    		for (var i = 1; i < speed; i++) {
-    			earthAngle++;
-    		}
-    		var pos = getPositions(earthAngle++, orbit);
-	    	earth.translation.x = pos.x + offset + 491;
-	    	earth.translation.y = pos.y + offset + 230;
-	    	if (periode <= (910-45)/speed){
-	    		console.log('r')
-	    		TurnRight()
-	    	}else{
-	    		console.log('l')
-	    		TurnLeft()
-	    	}
-    	} else if (periode <= (1108) / speed){
-    		for (var i = 1; i < speed; i++) {
-	    		earth.translation.y--;
-    		}
-	    	earth.translation.y--;
-    	} else if (periode <= (1198 )/ speed){
-    		for (var i = 1; i < speed; i++) {
-    			earthAngle++;
-    		}
-    		var pos = getPositions(earthAngle++, orbit);
-	    	earth.translation.x = pos.x + offset + 491;
-	    	earth.translation.y = pos.y + offset + 33;
-	    	if (periode <= (1198-45)/speed){
-	    		console.log('r')
-	    		TurnRight()
-	    	}else{
-	    		console.log('l')
-	    		TurnLeft()
-	    	}
-    	} else if (periode <= (1838)/speed){
-    		for (var i = 1; i < speed; i++) {
-	    		earth.translation.x++;
-    		}
-	    	earth.translation.x++;
-    	} else if (periode <= (2018)/speed){
-    		for (var i = 1; i < speed; i++) {
-    			earthAngle++;
-    		}
-    		var pos = getPositions(earthAngle++, orbit);
-	    	earth.translation.x = pos.x + offset + 1130;
-	    	earth.translation.y = pos.y + offset + 33;
-	    	if (periode <= (2018-90)/speed){
-	    		console.log('r')
-	    		TurnRight()
-	    	}else{
-	    		console.log('l')
-	    		TurnLeft()
-	    	}
-    	} else if (periode <= (2570) / speed ){
-    		for (var i = 1; i < speed; i++) {
-	    		earth.translation.x--;
-    		}
-	    	earth.translation.x--;
-    	} else if (periode <= (2750 ) / speed) {
-    		if (turnClock) {
-				earthAngle -= 180;
-				turnClock = false;
-    		}
-    		for (var i = 1; i < speed; i++) {
-    			earthAngle--;
-    		}
-    		var pos = getPositions(earthAngle--, orbit);
-	    	earth.translation.x = pos.x + offset + 579;
-	    	earth.translation.y = pos.y + offset + 133;
-	    	if (periode <= (2750-90)/speed){
-	    		console.log('l')
-	    		TurnLeft()
-	    	}else{
-	    		console.log('r')
-	    		TurnRight()
-	    	}
-    	} else if (periode < (3224 +80)/speed){
-    		for (var i = 1; i < speed; i++) {
-	    		earth.translation.x++;
-    		}
-	    	earth.translation.x++;
+		// repositioning the line
+        if(line.translation.x == 160){
+        	// time1 = new Date();
+        	line.translation.x = 1120+ (480*6);
+    	    transition1.translation.x = 1120+ (480*6) + 240;
+        }
 
-    		if (turnClock == false) {
-				earthAngle -= 180;
-				turnClock = true;
-				updateLap = false;
-    		}
-    	} 
-    }else{
-    	location.reload();
+        if(line2.translation.x == 160){
+        	// time2 = new Date();
+        	// alert(time1 +'   '+time2);
+        	line2.translation.x = 1120+ (480*6);
+    	    transition2.translation.x = 1120+ (480*6) + 240;
+        }
+
+        if(line3.translation.x == 160){
+
+        	line3.translation.x = 1120+ (480*6);
+    	    transition3.translation.x = 1120+ (480*6) + 240;
+        }
+        
+        if(line4.translation.x == 160){
+        	line4.translation.x = 1120+ (480*6);
+    	    transition4.translation.x = 1120+ (480*6) + 240;
+        }
+
+       if(line5.translation.x == 160){
+        	line5.translation.x = 1120+ (480*6);
+    	    transition5.translation.x = 1120+ (480*6) + 240;
+        }
+
+        if(line6.translation.x == 160){
+        	line6.translation.x = 1120+ (480*6);
+    	    transition6.translation.x = 1120+ (480*6) + 240;
+        }
+
+        if(line7.translation.x == 160){
+        	line7.translation.x = 1120+ (480*6);
+    	    transition7.translation.x = 1120+ (480*6) + 240;
+        }
+        
+        if(line8.translation.x == 160){
+        	line8.translation.x = 1120+ (480*6);
+    	    transition8.translation.x = 1120+ (480*6) + 240;
+        }
+		//end of repositioning the line
+
+
     }
+	//end of update Speed's graph
+
 });
-		// two.play();
 
-	function play(){
-		if(speed == '1')
-			alert('Mobil tidak memiliki kecepatan!')
-		else
-			two.play();
+	two.play()
+
+	function getRandomInt(min, max) {
+	    return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
-	function apply(){
-		var selectedStreet = $('#streetMenu').find(":selected").attr("id");
-		var selectedSpeed = $('#speedMenu').find(":selected").attr("id");
-		window.location.href = ('http://localhost:8000/driverless/'+selectedStreet+'/'+selectedSpeed)
-	}
-	function TurnLeft(){
-	    var http = new XMLHttpRequest();
-      	http.open("POST", "/driverless/TurnLeft", true);
-     // alert()
+	function getTorqueData(callback){
+		var http = new XMLHttpRequest();
+	  	http.open("POST", "/driverless/getTorque", true);
 	    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	    var params = "port=" + window.encodeURIComponent($('#port').val());
+	    var params = "";
 	    http.send((params));
 	    http.onload = function() {
-	      if(http.responseText=="404"){
-	        //error
-	        // alert(http.responseText);
-	      }else{
-	        // alert(http.responseText);
-	      }
+	      callback(JSON.parse(http.responseText));
 	    }
-	    return false;
 	}
 
-	function setSpeed(){
-	    var http = new XMLHttpRequest();
-      	http.open("POST", "/driverless/setSpeed", true);
-     // alert()
+	function getStart(callback){
+		var http = new XMLHttpRequest();
+	  	http.open("POST", "/driverless/isSpeedStarted", true);
 	    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	    var params = "port=" + window.encodeURIComponent($('#port').val());
+	    var params = "";
 	    http.send((params));
 	    http.onload = function() {
-	      if(http.responseText=="404"){
-	        //error
-	        // alert(http.responseText);
-	      }else{
-	        // alert(http.responseText);
-	      }
+	      callback(JSON.parse(http.responseText));
 	    }
-	    return false;
 	}
-
-	function TurnRight(){
-	    var http = new XMLHttpRequest();
-      	http.open("POST", "/driverless/TurnRight", true);
-
-	    http.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-	    var params = "port=" + window.encodeURIComponent($('#port').val());
-	    http.send((params));
-	    http.onload = function() {
-	      if(http.responseText=="404"){
-	        //error
-	        // alert(http.responseText);
-	      }else{
-	        // alert(http.responseText);
-	      }
-	    }
-	    return false;
-	}
-
-
 
 </script>

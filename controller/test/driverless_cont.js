@@ -34,10 +34,10 @@ module.exports = {
 		});
 	},
 	
-	getUpdate: function(res){
+	getTorque: function(res){
 		myPort.on('data', function (data) {
 		  console.log('Data: ' + data);
-		  res.send(data);
+		  // res.send(data);
 		});
 	},
 
